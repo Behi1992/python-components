@@ -1,0 +1,100 @@
+from lxml import etree
+import json
+from pathlib import Path
+
+
+def elem_to_dict(elem):
+
+    node = {}
+
+    for attr_key, attr_value in elem.attrib.items():
+        node[attr_key] = attr_value
+
+    if len(elem) == 0:
+
+        text = (elem.text or "").strip()
+
+        if not node:
+            return text
+
+        if text:
+            node["text"] = text
+
+        return node
+
+    for child in elem:
+
+        tag = child.tag.split("}")[-1]
+
+        value = elem_to_dict(child)
+
+        if tag in node:
+
+            if not isinstance(node[tag], list):
+                node[tag] = [node[tag]]
+
+            node[tag].append(value)
+
+        else:
+            node[tag] = value
+
+    return node
+
+
+def run_xml_ingestion(
+    xml_file,
+    output_file=None,
+    root_tag="Designation"
+):
+
+    if output_file is None:
+
+        output_file = (
+            f"{Path(xml_file).stem}_raw.jsonl"
+        )
+
+    count = 0
+
+    context = etree.iterparse(
+        xml_file,
+        events=("end",),
+        recover=True
+    )
+
+    with open(
+        output_file,
+        "w",
+        encoding="utf-8"
+    ) as f:
+
+        for _, elem in context:
+
+            if elem.tag.endswith(root_tag):
+
+                data = elem_to_dict(elem)
+
+                f.write(
+                    json.dumps(
+                        data,
+                        ensure_ascii=False
+                    ) + "\n"
+                )
+
+                count += 1
+
+                elem.clear()
+
+    print(f"Done: {count}")
+
+    return output_file
+
+
+if __name__ == "__main__":
+
+    output_file = run_xml_ingestion(
+        xml_file="/Users/mac/Desktop/VV_Python_Project/UK-Sanctions-List.xml",
+        output_file="UK-Sanctions-List_raw.jsonl",
+        root_tag="Designation"
+    )
+
+    print(f"Output: {output_file}")
