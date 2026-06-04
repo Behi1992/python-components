@@ -4,7 +4,7 @@ from pathlib import Path
 from datetime import datetime
 
 
-class TabularIngestor:
+class TabularParser:
 
     def __init__(self, output_dir="output"):
 
@@ -101,7 +101,32 @@ class TabularIngestor:
         )
 
         return str(output_file)
+    
+    def parse(self, file_path, config):
 
+        suffix = Path(file_path).suffix.lower()
+        sheet_name = config.get("sheet_name", 0)
+
+        if suffix == ".csv":
+            output_file = self.parse_csv(file_path)
+
+        elif suffix in [".xlsx", ".xls"]:
+            output_file = self.parse_excel(
+                file_path,
+                sheet_name=sheet_name
+            )
+
+        else:
+            raise ValueError(f"Unsupported file type: {suffix}")
+
+        with open(output_file, "r", encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+
+                if not line:
+                    continue
+
+                yield json.loads(line)
 
 # =========================================================
 # PUBLIC API
@@ -113,7 +138,7 @@ def run_tabular_ingestion(
     sheet_name=0
 ):
 
-    ingestor = TabularIngestor(
+    ingestor = TabularParser(
         output_dir=output_dir
     )
 

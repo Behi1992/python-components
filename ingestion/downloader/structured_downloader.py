@@ -5,7 +5,8 @@ import requests
 
 from .models import DownloadTask
 
-DOWNLOAD_DIR = Path("data/downloads")
+ROOT_DIR = Path(__file__).resolve().parents[2]
+DOWNLOAD_DIR = ROOT_DIR / "data" / "downloads"
 DOWNLOAD_DIR.mkdir(parents=True, exist_ok=True)
 
 
@@ -25,10 +26,11 @@ def _get_original_filename(task: DownloadTask) -> str:
 
 
 def _build_final_filename(task: DownloadTask, original_name: str) -> str:
-    timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    list_part = task.list_name or "default"
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    source_name = task.list_name or "default"
+    extension = Path(original_name).suffix
 
-    return f"{list_part}_{timestamp}_{original_name}"
+    return f"{source_name}_{timestamp}{extension}"
 
 
 def download_file(task: DownloadTask) -> str:

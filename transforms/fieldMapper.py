@@ -284,6 +284,32 @@ def has_meaningful_data(obj: dict) -> bool:
     return any(not is_empty_value(v) for v in obj.values())
 
 
+def has_real_source_data(rules: List[Rule], raw_json: dict) -> bool:
+    """
+    برای groupهای ساده مثل comments:
+    اگر فقط مقدارهای constant مثل type=other پر شده باشند، آیتم آرایه ساخته نشود.
+    آیتم فقط وقتی ساخته می‌شود که حداقل یک مقدار واقعی از سورس، غیرخالی باشد.
+    """
+    for rule in rules:
+        st = (rule.source_type or "").lower()
+
+        # constant خودش داده واقعی از سورس نیست
+        if st in ["constant", "raw"]:
+            continue
+
+        handler = HANDLERS.get(st)
+
+        if not handler:
+            continue
+
+        value = handler.handle(rule, raw_json)
+
+        if not is_empty_value(value):
+            return True
+
+    return False
+
+
 # =========================================================
 # HANDLERS
 # =========================================================
@@ -785,7 +811,11 @@ class GroupProcessor:
 
         obj = self._build_single_object(rules, raw_json)
 
-        if has_meaningful_data(obj):
+        # نکته مهم:
+        # در groupهای ساده، اگر فقط constantها مقدار داشته باشند
+        # مثلا comments[].type = other ولی comments[].text خالی باشد،
+        # نباید آیتم خالی داخل آرایه ساخته شود.
+        if has_real_source_data(rules, raw_json):
             return [obj]
 
         return []
