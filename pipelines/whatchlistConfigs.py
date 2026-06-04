@@ -31,5 +31,22 @@ WATCHLIST_CONFIGS = {
         "file_type": "xlsx",
         "schedule": "daily",
     },
+    
+    "AMLC-DNFBP": {
+    "source_name": "DNFBP",
+    "url": "http://www.amlc.gov.ph/images/PDFs/Main/DNFBP033126.pdf",
+    "file_type": "pdf",
+    "schedule": "daily",
+
+    "preprocessing": [
+        {
+            "handler": "detect_entity_type",
+            "config": {
+                "input_field": "INSTITUTION NAME",
+                "output_field": "entity_type"
+            }
+        }
+    ]
+},
 
 }

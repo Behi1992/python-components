@@ -1,37 +1,55 @@
-import json
 from pathlib import Path
 
 import pdfplumber
 
 
 class PdfParser:
+    """
+    PDF parser for tabular watchlist files.
 
-    def parse(self, pdf_path):
+    Output:
+        A list of dictionaries.
 
-        pdf_path = Path(pdf_path)
+    Important:
+        - It does NOT add metadata fields such as source_page or source_table.
+        - It only returns columns that exist in the PDF table.
+        - entity_type should be added later by preprocessing, not here.
+    """
+
+    def parse(self, file_path, config=None):
+        """
+        Parse a PDF file and return table rows as raw records.
+
+        This method is compatible with WatchlistPipeline:
+
+            raw_records = self.parser.parse(
+                file_path=downloaded_file_path,
+                config=self.config
+            )
+
+        Args:
+            file_path: Path to the downloaded PDF file.
+            config: Optional pipeline config. Not required for basic parsing.
+
+        Returns:
+            list[dict]: Raw records extracted from PDF tables.
+        """
+
+        pdf_path = Path(file_path)
 
         if not pdf_path.exists():
             raise FileNotFoundError(f"PDF file not found: {pdf_path}")
 
-        result = {
-            "metadata": {},
-            "tables": []
-        }
+        records = []
+        global_headers = None
 
         with pdfplumber.open(pdf_path) as pdf:
-
             total_pages = len(pdf.pages)
-
-            result["metadata"] = {
-                "file_name": pdf_path.name,
-                "page_count": total_pages
-            }
 
             print(f"PDF opened: {pdf_path.name}")
             print(f"Total pages: {total_pages}")
 
             for page_number, page in enumerate(pdf.pages, start=1):
-
                 print(f"Processing page {page_number}/{total_pages} ...")
 
                 tables = page.extract_tables()
@@ -43,7 +61,6 @@ class PdfParser:
                 print(f"  Found {len(tables)} table(s) on page {page_number}")
 
                 for table_index, table in enumerate(tables, start=1):
-
                     if not table:
                         print(f"  Table {table_index} is empty")
                         continue
@@ -53,30 +70,74 @@ class PdfParser:
                         f"{len(table)} row(s)"
                     )
 
-                    result["tables"].append({
-                        "page_number": page_number,
-                        "table_index": table_index,
-                        "rows": table
-                    })
+                    if global_headers is None:
+                        global_headers = self._build_headers(table[0])
+                        rows = table[1:]
 
-        print(f"Parsing finished. Total tables: {len(result['tables'])}")
+                        print("  Header detected from first table:")
+                        print(f"  {global_headers}")
+                    else:
+                        if self._is_same_header(table[0], global_headers):
+                            rows = table[1:]
+                            print("  Repeated header skipped")
+                        else:
+                            rows = table
 
-        return result
+                    for row in rows:
+                        record = self._row_to_record(row, global_headers)
 
-    def _export_json(self, result, output_file):
+                        if record:
+                            records.append(record)
 
-        with open(output_file, "w", encoding="utf-8") as f:
-            json.dump(
-                result,
-                f,
-                ensure_ascii=False,
-                indent=2
-            )
+        print(f"Parsing finished. Total records: {len(records)}")
 
-        print(f"JSON saved: {output_file}")
+        return records
+
+    def _row_to_record(self, row, headers):
+        """
+        Convert one PDF table row to a dictionary.
+
+        No extra fields are added here.
+        Only PDF columns are used as keys.
+        """
+
+        if not row or not headers:
+            return None
+
+        record = {}
+        has_value = False
+
+        for idx, header in enumerate(headers):
+            if not header:
+                continue
+
+            value = row[idx] if idx < len(row) else None
+            value = self._clean_value(value)
+
+            record[header] = value
+
+            if value not in [None, ""]:
+                has_value = True
+
+        if not has_value:
+            return None
+
+        return record
+
+    def _build_headers(self, header_row):
+        """
+        Clean header row extracted from PDF.
+        """
+
+        headers = []
+
+        for header in header_row:
+            clean_header = self._clean_header(header)
+            headers.append(clean_header)
+
+        return headers
 
     def _clean_header(self, header):
-
         if header is None:
             return None
 
@@ -92,7 +153,19 @@ class PdfParser:
             .strip()
         )
 
+    def _clean_value(self, value):
+        if value is None:
+            return None
+
+        if isinstance(value, str):
+            return value.replace("\n", " ").strip()
+
+        return value
+
     def _is_same_header(self, row, headers):
+        """
+        Detect repeated table headers on later pages.
+        """
 
         if not row or not headers:
             return False
@@ -127,113 +200,3 @@ class PdfParser:
                 matched += 1
 
         return matched >= 2
-
-    def _export_jsonl(self, result, output_file):
-
-        global_headers = None
-        written_count = 0
-
-        with open(output_file, "w", encoding="utf-8") as f:
-
-            for table in result["tables"]:
-
-                rows = table["rows"]
-
-                if not rows:
-                    continue
-
-                page_number = table["page_number"]
-                table_index = table["table_index"]
-
-                print(
-                    f"Exporting page {page_number}, "
-                    f"table {table_index}"
-                )
-
-                start_row_index = 0
-
-                if global_headers is None:
-                    global_headers = rows[0]
-                    start_row_index = 1
-
-                    print("  Header detected from first table:")
-                    print(f"  {global_headers}")
-
-                else:
-                    if self._is_same_header(rows[0], global_headers):
-                        start_row_index = 1
-                        print("  Repeated header skipped")
-                    else:
-                        start_row_index = 0
-
-                for row in rows[start_row_index:]:
-
-                    if not row:
-                        continue
-
-                    record = {
-                        "source_page": page_number,
-                        "source_table": table_index
-                    }
-
-                    has_value = False
-
-                    for idx, header in enumerate(global_headers):
-
-                        clean_header = self._clean_header(header)
-
-                        if not clean_header:
-                            continue
-
-                        value = row[idx] if idx < len(row) else None
-
-                        if isinstance(value, str):
-                            value = value.strip()
-
-                        record[clean_header] = value
-
-                        if value not in [None, ""]:
-                            has_value = True
-
-                    if has_value:
-                        f.write(
-                            json.dumps(
-                                record,
-                                ensure_ascii=False
-                            )
-                            + "\n"
-                        )
-                        written_count += 1
-
-        print(f"JSONL saved: {output_file}")
-        print(f"Total records written: {written_count}")
-
-    def convert(
-        self,
-        input_file,
-        output_file,
-        output_type="jsonl"
-    ):
-
-        result = self.parse(input_file)
-
-        output_type = output_type.lower()
-
-        if output_type == "json":
-            self._export_json(
-                result,
-                output_file
-            )
-
-        elif output_type == "jsonl":
-            self._export_jsonl(
-                result,
-                output_file
-            )
-
-        else:
-            raise ValueError(
-                f"Unsupported output type: {output_type}"
-            )
-
-        return output_file
