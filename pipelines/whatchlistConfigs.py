@@ -65,6 +65,7 @@ WATCHLIST_CONFIGS = {
         "enrichment": [
             {
                 "handler": "enrich_atc_profile_data",
+                "level": "record",
                 "config": {
                     "url_field": "detail_url",
                     "profile_dir": "data/downloads/profiles",
@@ -139,8 +140,17 @@ WATCHLIST_CONFIGS = {
 
         "enrichment": [
             {
-                "handler": "fix_eu_vessel_multiline_rows"
+                "handler": "fix_eu_vessel_multiline_rows",
+                "level": "dataset"
             }
         ]
+    },
+    "EU-TRAVEL-BAN": {
+        "source_name": "EU-TRAVEL-BAN",
+        "url": "https://www.sanctionsmap.eu/api/v1/travelbans/file/101",
+        "file_type": "xml",
+        "external_id": "id",
+        "root_tag": "sanctionEntity",
+        "schedule": "daily",
     },
 }

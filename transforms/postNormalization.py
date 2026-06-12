@@ -164,8 +164,16 @@ def date_normalization_handler(entity, rule):
 
     for item in values:
         raw_date = item.get("date_full", "")
+
+        if not raw_date:
+            raw_date = item.get("year", "")
+
         parsed_dates = normalize_date_field(raw_date)
-        normalized.extend(parsed_dates)
+
+        if parsed_dates:
+            normalized.extend(parsed_dates)
+        elif item.get("year"):
+            normalized.append(item)
 
     entity[source_path] = normalized
 

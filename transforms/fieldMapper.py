@@ -74,6 +74,12 @@ class JsonPath:
                     value = candidate.get(key)
 
                     if value is None:
+                        for candidate_key, candidate_value in candidate.items():
+                            if str(candidate_key).strip() == key.strip():
+                                value = candidate_value
+                                break
+
+                    if value is None:
                         continue
 
                     if is_list:
@@ -167,6 +173,12 @@ def detect_entity_type(raw_json: dict) -> str:
         return "Organization"
 
     if val == "vessel":
+        return "Vessel"
+
+    if (
+        raw_json.get("IMO number")
+        or raw_json.get("Vessel name at designation time")
+    ):
         return "Vessel"
 
     return "Individual"
@@ -478,26 +490,37 @@ class ExplodeHandler(BaseHandler):
         source_expr = str(rule.source_value).strip()
         separator = "|"
 
-        if "," in source_expr:
+        if source_expr.endswith(",,"):
+            source_expr = source_expr[:-2].strip()
+            separator = ","
+        elif "," in source_expr:
             source_expr, separator = source_expr.rsplit(",", 1)
             source_expr = source_expr.strip()
             separator = separator.strip()
 
-        raw_value = resolve_in_context(
+        raw_values = resolve_all_in_context(
             raw_json,
             source_expr,
             item,
             anchor
         )
 
-        if raw_value is None:
+        if not raw_values:
             return []
 
-        return [
-            x.strip()
-            for x in str(raw_value).split(separator)
-            if x.strip() and x.strip().upper() != "N/A"
-        ]
+        results = []
+
+        for raw_value in raw_values:
+            if raw_value is None:
+                continue
+
+            for x in str(raw_value).split(separator):
+                x = x.strip().strip(".")
+
+                if x and x.upper() != "N/A":
+                    results.append(x)
+
+        return results
 
 # class ConditionalPathHandler(BaseHandler):
     

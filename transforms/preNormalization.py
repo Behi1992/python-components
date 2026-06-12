@@ -46,6 +46,19 @@ class EnumHandler(BaseHandler):
             mapping[k.strip()] = v.strip()
 
         return mapping.get(str(value).strip(), value)
+    
+class RemoveListMarkersHandler(BaseHandler):
+    
+    def normalize(self, value, rule):
+
+        if value is None:
+            return value
+
+        value = str(value)
+
+        value = re.sub(r"\([a-zA-Z]\)\s*", "", value)
+
+        return value.strip()
 
 
 # =========================================================
@@ -84,6 +97,7 @@ class BeforeParenthesisHandler(BaseHandler):
 HANDLERS = {
     "enum": EnumHandler(),
     "before_parenthesis": BeforeParenthesisHandler(),
+    "remove_list_markers": RemoveListMarkersHandler(),
 }
 
 

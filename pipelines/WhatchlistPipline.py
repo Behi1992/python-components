@@ -130,14 +130,27 @@ class WatchlistPipeline:
             file_path=downloaded_file_path,
             config=self.config,
         )
+        raw_records = self.enrichment_engine.enrich_dataset(
+            records=raw_records,
+            rules=self.config.get("enrichment", [])
+        )
 
         raw_count = 0
         staging_count = 0
         final_records = []
         
         for rule in self.config.get("enrichment", []):
-            rule["config"]["profile_dir"] = str(ROOT_DIR / rule["config"]["profile_dir"])
-            rule["config"]["images_dir"] = str(ROOT_DIR / rule["config"]["images_dir"])
+    
+            config = rule.get("config")
+
+            if not config:
+                continue
+
+            if "profile_dir" in config:
+                config["profile_dir"] = str(ROOT_DIR / config["profile_dir"])
+
+            if "images_dir" in config:
+                config["images_dir"] = str(ROOT_DIR / config["images_dir"])
 
         for raw_record in raw_records:
             raw_count += 1
@@ -157,16 +170,16 @@ class WatchlistPipeline:
             current_record = raw_record
 
             current_record = self.apply_preprocessing(current_record)
-            print("AFTER PREPROCESSING:", current_record)
+            # print("AFTER PREPROCESSING:", current_record)
             current_record = self.pre_normalizer.pre_normalize_record(
                 source=self.source_name,
                 raw_json=current_record,
             )
-            print("AFTER PRE_NORMALIZER:", current_record)
+            # print("AFTER PRE_NORMALIZER:", current_record)
 
             current_record = self.mapper.map_record(current_record)
             
-            print("AFTER MAPPING:", current_record)
+            # print("AFTER MAPPING:", current_record)
 
             current_record = self.post_normalizer.post_normalize_record(
                 current_record
@@ -206,7 +219,7 @@ if __name__ == "__main__":
     source_config_df = pd.read_excel(rules_dir / "sourceConfig.xlsx")
     post_rules_df = pd.read_excel(rules_dir / "postNormalization.xlsx")
 
-    config = WATCHLIST_CONFIGS["ATC-DESIGNATED-TERRORIST-INDIVIDUALS"]
+    config = WATCHLIST_CONFIGS["EU-TRAVEL-BAN"]
 
     pre_normalizer = PreNormalizationEngine(
         prenormalization_df=prenorm_df,
