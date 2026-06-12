@@ -1,0 +1,132 @@
+{
+    "entity_type": {
+        "type": "string",
+        "optional": false,
+        "occurrences": 64
+    },
+    "name": {
+        "type": "string",
+        "optional": false,
+        "occurrences": 64
+    },
+    "category": {
+        "type": "string",
+        "optional": false,
+        "occurrences": 64
+    },
+    "atc_resolution_no": {
+        "type": "string",
+        "optional": false,
+        "occurrences": 64
+    },
+    "date_issued": {
+        "type": "string",
+        "optional": false,
+        "occurrences": 64
+    },
+    "detail_url": {
+        "type": "string",
+        "optional": false,
+        "occurrences": 64
+    },
+    "unique_id": {
+        "type": "string",
+        "optional": false,
+        "occurrences": 64
+    },
+    "profile_slug": {
+        "type": "string",
+        "optional": false,
+        "occurrences": 64
+    },
+    "profile_data": {
+        "type": "object",
+        "optional": true,
+        "occurrences": 16
+    },
+    "profile_data.profile_file": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 16
+    },
+    "profile_data.profile_slug": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 16
+    },
+    "profile_data.profile_fields": {
+        "type": "object",
+        "optional": true,
+        "occurrences": 16
+    },
+    "profile_data.profile_fields.Name": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 16
+    },
+    "profile_data.profile_fields.Variant/s": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 16
+    },
+    "profile_data.profile_fields.Alias/es": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 16
+    },
+    "profile_data.profile_fields.Gender": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 16
+    },
+    "profile_data.profile_fields.Date and Place of Birth": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 16
+    },
+    "profile_data.profile_fields.Last Known Address/es": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 16
+    },
+    "profile_data.profile_fields.Group Affiliation": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 16
+    },
+    "profile_data.profile_fields.Designation": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 16
+    },
+    "profile_data.profile_fields.Status": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 16
+    },
+    "profile_data.profile_fields.Case/s Filed": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 16
+    },
+    "profile_data.image_urls": {
+        "type": "array",
+        "optional": true,
+        "occurrences": 16
+    },
+    "profile_data.image_urls[]": {
+        "type": "array",
+        "optional": true,
+        "occurrences": 16
+    },
+    "profile_data.local_images": {
+        "type": "array",
+        "optional": true,
+        "occurrences": 16
+    },
+    "profile_data.local_images[]": {
+        "type": "array",
+        "optional": true,
+        "occurrences": 16
+    }
+}

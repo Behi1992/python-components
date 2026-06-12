@@ -5,11 +5,14 @@ from datetime import datetime
 import re
 
 DATE_PATTERNS = [
-    r"\b\d{4}-\d{2}-\d{2}(?:\s\d{2}:\d{2}:\d{2})?\b",  # ISO
-    r"\b\d{1,2}/\d{1,2}/\d{4}\b",                      # DD/MM/YYYY
-    r"\b\d{1,2}/\d{4}\b",                              # MM/YYYY
-    r"\bApproximately\s+\d{4}\b",                      # Approximately 1968
-    r"\b\d{4}\b",                                      # YEAR
+    r"\b\d{4}-\d{2}-\d{2}(?:\s\d{2}:\d{2}:\d{2})?\b",
+    r"\b\d{1,2}\s+[A-Za-z]+\s+\d{4}\b",          # 3 May 1949
+    r"\b[A-Za-z]+\s+\d{1,2},\s*\d{4}\b",        # May 3, 1949
+    r"\b\d{1,2}/\d{1,2}/\d{4}\b",
+    r"\b\d{1,2}/\d{4}\b",
+    r"\bApproximately\s+\d{4}\b",
+    r"\b\d{4}\s*\(\s*\d{4}\s*\)\b",             # 1945 (1955)
+    r"\b\d{4}\b",
 ]
 
 
@@ -20,7 +23,6 @@ def build_date_object(raw, year="", month="", day=""):
         "month": month,
         "day": day,
     }
-
 
 def parse_date_token(token):
     token = token.strip()
@@ -35,6 +37,30 @@ def parse_date_token(token):
         )
     except:
         pass
+
+    for fmt in ["%d %B %Y", "%d %b %Y"]:
+        try:
+            dt = datetime.strptime(token, fmt)
+            return build_date_object(
+                raw=token,
+                year=str(dt.year),
+                month=f"{dt.month:02}",
+                day=f"{dt.day:02}",
+            )
+        except:
+            pass
+
+    for fmt in ["%B %d, %Y", "%b %d, %Y"]:
+        try:
+            dt = datetime.strptime(token, fmt)
+            return build_date_object(
+                raw=token,
+                year=str(dt.year),
+                month=f"{dt.month:02}",
+                day=f"{dt.day:02}",
+            )
+        except:
+            pass
 
     if token.startswith("Approximately"):
         year_match = re.search(r"\d{4}", token)
@@ -61,14 +87,20 @@ def parse_date_token(token):
             month=month.zfill(2),
         )
 
+    if re.fullmatch(r"\d{4}\s*\(\s*\d{4}\s*\)", token):
+        years = re.findall(r"\d{4}", token)
+        return [
+            build_date_object(raw=years[0], year=years[0]),
+            build_date_object(raw=years[1], year=years[1]),
+        ]
+
     if re.fullmatch(r"\d{4}", token):
         return build_date_object(
             raw=token,
             year=token,
         )
 
-    return None
-
+    return None 
 
 def normalize_date_field(raw_value):
     if not raw_value:
@@ -135,7 +167,6 @@ def date_normalization_handler(entity, rule):
         parsed_dates = normalize_date_field(raw_date)
         normalized.extend(parsed_dates)
 
-    # 🔥 FIX مهم: همیشه overwrite کن
     entity[source_path] = normalized
 
 
@@ -176,7 +207,6 @@ def empty_dependency_handler(entity, rule):
 
 
 def drop_empty_special_fields(entity):
-
     keys_to_remove_if_empty = [
         "Reference Number",
         "comment"
@@ -191,14 +221,63 @@ def drop_empty_special_fields(entity):
     return entity
 
 
+def make_hashable(value):
+    if isinstance(value, dict):
+        return tuple(
+            sorted(
+                (k, make_hashable(v))
+                for k, v in value.items()
+            )
+        )
+
+    if isinstance(value, list):
+        return tuple(make_hashable(v) for v in value)
+
+    return value
+
+
+def deduplicate_all_arrays(obj):
+    if isinstance(obj, dict):
+        for key, value in obj.items():
+            obj[key] = deduplicate_all_arrays(value)
+
+        return obj
+
+    if isinstance(obj, list):
+        deduped = []
+        seen = set()
+
+        for item in obj:
+            cleaned_item = deduplicate_all_arrays(item)
+            item_key = make_hashable(cleaned_item)
+
+            if item_key in seen:
+                continue
+
+            seen.add(item_key)
+            deduped.append(cleaned_item)
+
+        return deduped
+
+    return obj
+
+
+def deduplicate_all_arrays_handler(entity, rule):
+    cleaned = deepcopy(entity)
+    cleaned = deduplicate_all_arrays(cleaned)
+
+    entity.clear()
+    entity.update(cleaned)
+
+
 HANDLERS = {
     "EMPTY_DEPENDENCY": empty_dependency_handler,
     "DATE_NORMALIZATION": date_normalization_handler,
+    "DEDUPLICATE_ALL_ARRAYS": deduplicate_all_arrays_handler,
 }
 
 
 def run_post_normalization(jsonl_data, rules_df):
-
     rules_df = rules_df.sort_values("priority")
 
     output = []
@@ -207,7 +286,6 @@ def run_post_normalization(jsonl_data, rules_df):
         entity = deepcopy(entity)
 
         for _, rule in rules_df.iterrows():
-
             rule_type = rule["rule_type"]
             handler = HANDLERS.get(rule_type)
 
@@ -215,7 +293,6 @@ def run_post_normalization(jsonl_data, rules_df):
                 handler(entity, rule)
 
         entity = drop_empty_special_fields(entity)
-
         output.append(entity)
 
     return output
@@ -223,9 +300,11 @@ def run_post_normalization(jsonl_data, rules_df):
 
 def load_jsonl(path):
     data = []
+
     with open(path, "r", encoding="utf-8") as f:
         for line in f:
             data.append(json.loads(line))
+
     return data
 
 
@@ -233,6 +312,7 @@ def save_jsonl(data, path):
     with open(path, "w", encoding="utf-8") as f:
         for item in data:
             f.write(json.dumps(item, ensure_ascii=False) + "\n")
+
 
 def post_normalize_record(record, rules_df):
     result = run_post_normalization(

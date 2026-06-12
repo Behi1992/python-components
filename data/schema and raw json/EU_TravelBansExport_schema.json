@@ -1,0 +1,692 @@
+{
+    "logicalId": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 3859
+    },
+    "remark": {
+        "type": "array | string",
+        "optional": true,
+        "occurrences": 475
+    },
+    "regulation": {
+        "type": "array | object",
+        "optional": false,
+        "occurrences": 3871
+    },
+    "regulation.regulationType": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 3137
+    },
+    "regulation.organisationType": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 3137
+    },
+    "regulation.numberTitle": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 3137
+    },
+    "regulation.publicationUrl": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 3137
+    },
+    "subjectType": {
+        "type": "object",
+        "optional": true,
+        "occurrences": 3859
+    },
+    "subjectType.code": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 3859
+    },
+    "subjectType.classificationCode": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 3859
+    },
+    "nameAlias": {
+        "type": "array | object",
+        "optional": true,
+        "occurrences": 3859
+    },
+    "nameAlias[]": {
+        "type": "array",
+        "optional": true,
+        "occurrences": 3473
+    },
+    "nameAlias[].logicalId": {
+        "type": "string",
+        "optional": false,
+        "occurrences": 15020
+    },
+    "nameAlias[].regulationLanguage": {
+        "type": "string",
+        "optional": false,
+        "occurrences": 15020
+    },
+    "nameAlias[].wholeName": {
+        "type": "string",
+        "optional": false,
+        "occurrences": 15020
+    },
+    "nameAlias[].function": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 3311
+    },
+    "nameAlias[].title": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 559
+    },
+    "nameAlias[].strong": {
+        "type": "string",
+        "optional": false,
+        "occurrences": 15020
+    },
+    "citizenship": {
+        "type": "array | object",
+        "optional": true,
+        "occurrences": 2305
+    },
+    "citizenship[]": {
+        "type": "array",
+        "optional": true,
+        "occurrences": 772
+    },
+    "citizenship[].logicalId": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1919
+    },
+    "citizenship[].regulationLanguage": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1919
+    },
+    "citizenship[].countryIso2Code": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1919
+    },
+    "citizenship[].countryDescription": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1919
+    },
+    "citizenship[].diplomatic": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1093
+    },
+    "citizenship[].knownExpired": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1093
+    },
+    "citizenship[].knownFalse": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1093
+    },
+    "citizenship[].reportedLost": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1093
+    },
+    "citizenship[].revokedByIssuer": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1093
+    },
+    "citizenship[].number": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1093
+    },
+    "citizenship[].identificationTypeCode": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1093
+    },
+    "citizenship[].identificationTypeDescription": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1093
+    },
+    "citizenship[].remark": {
+        "type": "array | string",
+        "optional": true,
+        "occurrences": 646
+    },
+    "birthdate": {
+        "type": "array | object",
+        "optional": true,
+        "occurrences": 3424
+    },
+    "birthdate.logicalId": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 3140
+    },
+    "birthdate.regulationLanguage": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 3140
+    },
+    "birthdate.calendarType": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 3140
+    },
+    "birthdate.year": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 3046
+    },
+    "birthdate.place": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 362
+    },
+    "birthdate.countryIso2Code": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 3140
+    },
+    "birthdate.countryDescription": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 3140
+    },
+    "birthdate.remark": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 669
+    },
+    "address": {
+        "type": "array | object",
+        "optional": true,
+        "occurrences": 453
+    },
+    "address[]": {
+        "type": "array",
+        "optional": true,
+        "occurrences": 88
+    },
+    "address[].logicalId": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 220
+    },
+    "address[].regulationLanguage": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 220
+    },
+    "address[].city": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 143
+    },
+    "address[].street": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 72
+    },
+    "address[].countryIso2Code": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 220
+    },
+    "address[].countryDescription": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 220
+    },
+    "address[].region": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 22
+    },
+    "address[].place": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 12
+    },
+    "address[].remark": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 92
+    },
+    "nameAlias.logicalId": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 386
+    },
+    "nameAlias.regulationLanguage": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 386
+    },
+    "nameAlias.wholeName": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 386
+    },
+    "nameAlias.function": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 360
+    },
+    "nameAlias.title": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 100
+    },
+    "nameAlias.strong": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 386
+    },
+    "birthdate.circa": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 74
+    },
+    "birthdate.city": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1341
+    },
+    "nameAlias[].firstName": {
+        "type": "string",
+        "optional": false,
+        "occurrences": 8005
+    },
+    "nameAlias[].middleName": {
+        "type": "string",
+        "optional": false,
+        "occurrences": 5193
+    },
+    "nameAlias[].lastName": {
+        "type": "string",
+        "optional": false,
+        "occurrences": 8017
+    },
+    "citizenship.logicalId": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1533
+    },
+    "citizenship.regulationLanguage": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1533
+    },
+    "citizenship.countryIso2Code": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1533
+    },
+    "citizenship.countryDescription": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1533
+    },
+    "birthdate[]": {
+        "type": "array",
+        "optional": true,
+        "occurrences": 284
+    },
+    "birthdate[].logicalId": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 768
+    },
+    "birthdate[].regulationLanguage": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 768
+    },
+    "birthdate[].circa": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 105
+    },
+    "birthdate[].calendarType": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 768
+    },
+    "birthdate[].city": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 496
+    },
+    "birthdate[].year": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 710
+    },
+    "birthdate[].countryIso2Code": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 768
+    },
+    "birthdate[].countryDescription": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 768
+    },
+    "nameAlias.firstName": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 235
+    },
+    "nameAlias.lastName": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 236
+    },
+    "birthdate[].yearRangeFrom": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 29
+    },
+    "birthdate[].yearRangeTo": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 29
+    },
+    "birthdate[].remark": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 144
+    },
+    "birthdate.region": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 361
+    },
+    "birthdate[].region": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 92
+    },
+    "birthdate[].place": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 90
+    },
+    "citizenship[].validFrom": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 30
+    },
+    "birthdate.yearRangeFrom": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 25
+    },
+    "birthdate.yearRangeTo": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 26
+    },
+    "nameAlias[].gender": {
+        "type": "string",
+        "optional": false,
+        "occurrences": 11159
+    },
+    "nameAlias.middleName": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 42
+    },
+    "citizenship[].validTo": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 120
+    },
+    "address.logicalId": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 365
+    },
+    "address.regulationLanguage": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 365
+    },
+    "address.countryIso2Code": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 365
+    },
+    "address.countryDescription": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 365
+    },
+    "nameAlias.gender": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 297
+    },
+    "address.city": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 203
+    },
+    "address.street": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 136
+    },
+    "nameAlias[].remark": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 985
+    },
+    "birthdate[].birthdate": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 404
+    },
+    "birthdate[].dayOfMonth": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 404
+    },
+    "birthdate[].monthOfYear": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 415
+    },
+    "birthdate.birthdate": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 2712
+    },
+    "birthdate.dayOfMonth": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 2712
+    },
+    "birthdate.monthOfYear": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 2721
+    },
+    "citizenship[].issueDate": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 120
+    },
+    "address.remark": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 87
+    },
+    "address.region": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 57
+    },
+    "address.place": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 26
+    },
+    "citizenship.diplomatic": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 118
+    },
+    "citizenship.knownExpired": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 118
+    },
+    "citizenship.knownFalse": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 118
+    },
+    "citizenship.reportedLost": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 118
+    },
+    "citizenship.revokedByIssuer": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 118
+    },
+    "citizenship.number": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 118
+    },
+    "citizenship.identificationTypeCode": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 118
+    },
+    "citizenship.identificationTypeDescription": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 118
+    },
+    "citizenship.remark": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 93
+    },
+    "nameAlias.remark": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 24
+    },
+    "address.zipCode": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 30
+    },
+    "regulation[]": {
+        "type": "array",
+        "optional": true,
+        "occurrences": 734
+    },
+    "regulation[].regulationType": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1502
+    },
+    "regulation[].organisationType": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1502
+    },
+    "regulation[].numberTitle": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1502
+    },
+    "regulation[].publicationUrl": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1502
+    },
+    "citizenship[].remark[]": {
+        "type": "array",
+        "optional": true,
+        "occurrences": 3
+    },
+    "citizenship[].region": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 22
+    },
+    "address[].zipCode": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 15
+    },
+    "citizenship[].issuedBy": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 26
+    },
+    "unitedNationId": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 65
+    },
+    "designationDetails": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 103
+    },
+    "citizenship.issueDate": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 6
+    },
+    "citizenship.validTo": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 10
+    },
+    "citizenship[].nameOnDocument": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 4
+    },
+    "remark[]": {
+        "type": "array",
+        "optional": true,
+        "occurrences": 12
+    },
+    "citizenship.region": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 2
+    },
+    "address.poBox": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 4
+    },
+    "citizenship.validFrom": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1
+    }
+}

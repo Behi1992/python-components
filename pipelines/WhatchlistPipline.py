@@ -16,15 +16,26 @@ from ingestion.downloader import interface as downloader
 from pipelines.whatchlistConfigs import WATCHLIST_CONFIGS
 from parsing.xmlParser import XmlParser
 from parsing.pdfParser import PdfParser
+from parsing.htmlParser import HtmlParser
 from parsing.tabularParser import TabularParser
 from ingestion.downloader.models import DownloadTask
-from transforms.preProcessing import detect_entity_type
+from transforms.preProcessing import (
+    detect_entity_type,
+    generate_atc_unique_id,
+    extract_name_from_url,
+    split_atc_date_and_place_of_birth,
+    clean_atc_profile_name_fields,
+)
+from transforms.enrichmentEngine import EnrichmentEngine
 
 
 PREPROCESSING_HANDLERS = {
     "detect_entity_type": detect_entity_type,
+    "generate_atc_unique_id": generate_atc_unique_id,
+    "extract_name_from_url": extract_name_from_url,
+    "split_atc_date_and_place_of_birth": split_atc_date_and_place_of_birth,
+    "clean_atc_profile_name_fields": clean_atc_profile_name_fields,    
 }
-
 
 # from database.inserts import (
 #     insert_watchlist_file,
@@ -50,6 +61,7 @@ class WatchlistPipeline:
         self.mapper = mapper
         self.post_normalizer = post_normalizer
         self.parser = self.get_parser()
+        self.enrichment_engine = EnrichmentEngine()
 
     def get_parser(self):
         file_type = self.config.get("file_type", "").lower()
@@ -59,6 +71,9 @@ class WatchlistPipeline:
 
         if file_type == "pdf":
             return PdfParser()
+        
+        if file_type == "html":
+            return HtmlParser()
 
         if file_type in ["csv", "xlsx", "xls"]:
             return TabularParser()
@@ -92,7 +107,13 @@ class WatchlistPipeline:
             list_name=self.source_name,
         )
 
-        downloaded_file_path = self.downloader.download(download_task)
+        local_path = self.config.get("local_path")
+
+        if local_path:
+            downloaded_file_path = ROOT_DIR / local_path
+            print(f"Using local file: {downloaded_file_path}")
+        else:
+            downloaded_file_path = self.downloader.download(download_task)
 
         # file_id = insert_watchlist_file(
         #     source_name=self.source_name,
@@ -103,6 +124,8 @@ class WatchlistPipeline:
         #     schedule=self.config.get("schedule"),
         # )
 
+        print(downloaded_file_path)
+
         raw_records = self.parser.parse(
             file_path=downloaded_file_path,
             config=self.config,
@@ -111,10 +134,19 @@ class WatchlistPipeline:
         raw_count = 0
         staging_count = 0
         final_records = []
+        
+        for rule in self.config.get("enrichment", []):
+            rule["config"]["profile_dir"] = str(ROOT_DIR / rule["config"]["profile_dir"])
+            rule["config"]["images_dir"] = str(ROOT_DIR / rule["config"]["images_dir"])
 
         for raw_record in raw_records:
             raw_count += 1
-
+            
+            raw_record = self.enrichment_engine.enrich_record(
+                        record=raw_record,
+                        rules=self.config.get("enrichment", [])
+                        )
+            
             # raw_record_id = insert_watchlist_raw_record(
             #     file_id=file_id,
             #     source_name=self.source_name,
@@ -125,13 +157,16 @@ class WatchlistPipeline:
             current_record = raw_record
 
             current_record = self.apply_preprocessing(current_record)
-
+            print("AFTER PREPROCESSING:", current_record)
             current_record = self.pre_normalizer.pre_normalize_record(
                 source=self.source_name,
                 raw_json=current_record,
             )
+            print("AFTER PRE_NORMALIZER:", current_record)
 
             current_record = self.mapper.map_record(current_record)
+            
+            print("AFTER MAPPING:", current_record)
 
             current_record = self.post_normalizer.post_normalize_record(
                 current_record
@@ -171,7 +206,7 @@ if __name__ == "__main__":
     source_config_df = pd.read_excel(rules_dir / "sourceConfig.xlsx")
     post_rules_df = pd.read_excel(rules_dir / "postNormalization.xlsx")
 
-    config = WATCHLIST_CONFIGS["AMLC-DNFBP"]
+    config = WATCHLIST_CONFIGS["ATC-DESIGNATED-TERRORIST-INDIVIDUALS"]
 
     pre_normalizer = PreNormalizationEngine(
         prenormalization_df=prenorm_df,

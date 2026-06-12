@@ -116,9 +116,9 @@ if __name__ == "__main__":
     parser = XmlParser()
 
     output_file = parser.run_xml_ingestion(
-        xml_file="/Users/mac/Desktop/VV_Python_Project/UK-Sanctions-List.xml",
-        output_file="UK-Sanctions-List_raw.jsonl",
-        root_tag="Designation"
+        xml_file="/Users/mac/Desktop/VV_Python_Project/20260430-FULL-1_1(xsd).xml",
+        output_file="EU_full.jsonl",
+        root_tag="sanctionEntity"
     )
 
     print(f"Output: {output_file}")

@@ -1,0 +1,1132 @@
+{
+    "designationDetails": {
+        "type": "string",
+        "optional": false,
+        "occurrences": 6002
+    },
+    "unitedNationId": {
+        "type": "string",
+        "optional": false,
+        "occurrences": 6002
+    },
+    "euReferenceNumber": {
+        "type": "string",
+        "optional": false,
+        "occurrences": 6002
+    },
+    "logicalId": {
+        "type": "string",
+        "optional": false,
+        "occurrences": 6002
+    },
+    "remark": {
+        "type": "array | string",
+        "optional": true,
+        "occurrences": 693
+    },
+    "regulation": {
+        "type": "object",
+        "optional": false,
+        "occurrences": 6002
+    },
+    "regulation.regulationType": {
+        "type": "string",
+        "optional": false,
+        "occurrences": 6002
+    },
+    "regulation.organisationType": {
+        "type": "string",
+        "optional": false,
+        "occurrences": 6002
+    },
+    "regulation.publicationDate": {
+        "type": "string",
+        "optional": false,
+        "occurrences": 6002
+    },
+    "regulation.entryIntoForceDate": {
+        "type": "string",
+        "optional": false,
+        "occurrences": 6002
+    },
+    "regulation.numberTitle": {
+        "type": "string",
+        "optional": false,
+        "occurrences": 6002
+    },
+    "regulation.programme": {
+        "type": "string",
+        "optional": false,
+        "occurrences": 6002
+    },
+    "regulation.logicalId": {
+        "type": "string",
+        "optional": false,
+        "occurrences": 6002
+    },
+    "regulation.publicationUrl": {
+        "type": "string",
+        "optional": false,
+        "occurrences": 6002
+    },
+    "subjectType": {
+        "type": "object",
+        "optional": false,
+        "occurrences": 6002
+    },
+    "subjectType.code": {
+        "type": "string",
+        "optional": false,
+        "occurrences": 6002
+    },
+    "subjectType.classificationCode": {
+        "type": "string",
+        "optional": false,
+        "occurrences": 6002
+    },
+    "nameAlias": {
+        "type": "array | object",
+        "optional": false,
+        "occurrences": 6002
+    },
+    "nameAlias[]": {
+        "type": "array",
+        "optional": true,
+        "occurrences": 5276
+    },
+    "nameAlias[].firstName": {
+        "type": "string",
+        "optional": false,
+        "occurrences": 29564
+    },
+    "nameAlias[].middleName": {
+        "type": "string",
+        "optional": false,
+        "occurrences": 29564
+    },
+    "nameAlias[].lastName": {
+        "type": "string",
+        "optional": false,
+        "occurrences": 29564
+    },
+    "nameAlias[].wholeName": {
+        "type": "string",
+        "optional": false,
+        "occurrences": 29564
+    },
+    "nameAlias[].function": {
+        "type": "string",
+        "optional": false,
+        "occurrences": 29564
+    },
+    "nameAlias[].gender": {
+        "type": "string",
+        "optional": false,
+        "occurrences": 12073
+    },
+    "nameAlias[].title": {
+        "type": "string",
+        "optional": false,
+        "occurrences": 29564
+    },
+    "nameAlias[].nameLanguage": {
+        "type": "string",
+        "optional": false,
+        "occurrences": 29564
+    },
+    "nameAlias[].strong": {
+        "type": "string",
+        "optional": false,
+        "occurrences": 29564
+    },
+    "nameAlias[].regulationLanguage": {
+        "type": "string",
+        "optional": false,
+        "occurrences": 29564
+    },
+    "nameAlias[].logicalId": {
+        "type": "string",
+        "optional": false,
+        "occurrences": 29564
+    },
+    "nameAlias[].regulationSummary": {
+        "type": "object",
+        "optional": false,
+        "occurrences": 29564
+    },
+    "nameAlias[].regulationSummary.regulationType": {
+        "type": "string",
+        "optional": false,
+        "occurrences": 29564
+    },
+    "nameAlias[].regulationSummary.publicationDate": {
+        "type": "string",
+        "optional": false,
+        "occurrences": 29564
+    },
+    "nameAlias[].regulationSummary.numberTitle": {
+        "type": "string",
+        "optional": false,
+        "occurrences": 29564
+    },
+    "nameAlias[].regulationSummary.publicationUrl": {
+        "type": "string",
+        "optional": false,
+        "occurrences": 29564
+    },
+    "citizenship": {
+        "type": "array | object",
+        "optional": true,
+        "occurrences": 2621
+    },
+    "citizenship.region": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 2537
+    },
+    "citizenship.countryIso2Code": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 2537
+    },
+    "citizenship.countryDescription": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 2537
+    },
+    "citizenship.regulationLanguage": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 2537
+    },
+    "citizenship.logicalId": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 2537
+    },
+    "citizenship.regulationSummary": {
+        "type": "object",
+        "optional": true,
+        "occurrences": 2537
+    },
+    "citizenship.regulationSummary.regulationType": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 2537
+    },
+    "citizenship.regulationSummary.publicationDate": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 2537
+    },
+    "citizenship.regulationSummary.numberTitle": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 2537
+    },
+    "citizenship.regulationSummary.publicationUrl": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 2537
+    },
+    "birthdate": {
+        "type": "array | object",
+        "optional": true,
+        "occurrences": 3844
+    },
+    "birthdate.circa": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 3547
+    },
+    "birthdate.calendarType": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 3547
+    },
+    "birthdate.city": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 3547
+    },
+    "birthdate.zipCode": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 3547
+    },
+    "birthdate.birthdate": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 3033
+    },
+    "birthdate.dayOfMonth": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 3033
+    },
+    "birthdate.monthOfYear": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 3044
+    },
+    "birthdate.year": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 3434
+    },
+    "birthdate.region": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 3547
+    },
+    "birthdate.place": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 3547
+    },
+    "birthdate.countryIso2Code": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 3547
+    },
+    "birthdate.countryDescription": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 3547
+    },
+    "birthdate.regulationLanguage": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 3547
+    },
+    "birthdate.logicalId": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 3547
+    },
+    "birthdate.regulationSummary": {
+        "type": "object",
+        "optional": true,
+        "occurrences": 3547
+    },
+    "birthdate.regulationSummary.regulationType": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 3547
+    },
+    "birthdate.regulationSummary.publicationDate": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 3547
+    },
+    "birthdate.regulationSummary.numberTitle": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 3547
+    },
+    "birthdate.regulationSummary.publicationUrl": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 3547
+    },
+    "birthdate[]": {
+        "type": "array",
+        "optional": true,
+        "occurrences": 297
+    },
+    "birthdate[].circa": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 804
+    },
+    "birthdate[].calendarType": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 804
+    },
+    "birthdate[].city": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 804
+    },
+    "birthdate[].zipCode": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 804
+    },
+    "birthdate[].year": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 732
+    },
+    "birthdate[].region": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 804
+    },
+    "birthdate[].place": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 804
+    },
+    "birthdate[].countryIso2Code": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 804
+    },
+    "birthdate[].countryDescription": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 804
+    },
+    "birthdate[].regulationLanguage": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 804
+    },
+    "birthdate[].logicalId": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 804
+    },
+    "birthdate[].regulationSummary": {
+        "type": "object",
+        "optional": true,
+        "occurrences": 804
+    },
+    "birthdate[].regulationSummary.regulationType": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 804
+    },
+    "birthdate[].regulationSummary.publicationDate": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 804
+    },
+    "birthdate[].regulationSummary.numberTitle": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 804
+    },
+    "birthdate[].regulationSummary.publicationUrl": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 804
+    },
+    "birthdate[].birthdate": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 392
+    },
+    "birthdate[].dayOfMonth": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 391
+    },
+    "birthdate[].monthOfYear": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 402
+    },
+    "nameAlias.firstName": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 726
+    },
+    "nameAlias.middleName": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 726
+    },
+    "nameAlias.lastName": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 726
+    },
+    "nameAlias.wholeName": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 726
+    },
+    "nameAlias.function": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 726
+    },
+    "nameAlias.title": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 726
+    },
+    "nameAlias.nameLanguage": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 726
+    },
+    "nameAlias.strong": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 726
+    },
+    "nameAlias.regulationLanguage": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 726
+    },
+    "nameAlias.logicalId": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 726
+    },
+    "nameAlias.regulationSummary": {
+        "type": "object",
+        "optional": true,
+        "occurrences": 726
+    },
+    "nameAlias.regulationSummary.regulationType": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 726
+    },
+    "nameAlias.regulationSummary.publicationDate": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 726
+    },
+    "nameAlias.regulationSummary.numberTitle": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 726
+    },
+    "nameAlias.regulationSummary.publicationUrl": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 726
+    },
+    "identification": {
+        "type": "array | object",
+        "optional": true,
+        "occurrences": 1773
+    },
+    "identification.diplomatic": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1147
+    },
+    "identification.knownExpired": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1147
+    },
+    "identification.knownFalse": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1147
+    },
+    "identification.reportedLost": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1147
+    },
+    "identification.revokedByIssuer": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1147
+    },
+    "identification.issuedBy": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1147
+    },
+    "identification.latinNumber": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1147
+    },
+    "identification.nameOnDocument": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1147
+    },
+    "identification.number": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1147
+    },
+    "identification.region": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1147
+    },
+    "identification.identificationTypeCode": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1147
+    },
+    "identification.identificationTypeDescription": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1147
+    },
+    "identification.countryIso2Code": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1147
+    },
+    "identification.countryDescription": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1147
+    },
+    "identification.regulationLanguage": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1147
+    },
+    "identification.logicalId": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1147
+    },
+    "identification.remark": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 688
+    },
+    "identification.regulationSummary": {
+        "type": "object",
+        "optional": true,
+        "occurrences": 1147
+    },
+    "identification.regulationSummary.regulationType": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1147
+    },
+    "identification.regulationSummary.publicationDate": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1147
+    },
+    "identification.regulationSummary.numberTitle": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1147
+    },
+    "identification.regulationSummary.publicationUrl": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1147
+    },
+    "address": {
+        "type": "array | object",
+        "optional": true,
+        "occurrences": 1865
+    },
+    "address.city": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1559
+    },
+    "address.street": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1559
+    },
+    "address.poBox": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1559
+    },
+    "address.zipCode": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1559
+    },
+    "address.region": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1559
+    },
+    "address.place": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1559
+    },
+    "address.asAtListingTime": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1559
+    },
+    "address.countryIso2Code": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1559
+    },
+    "address.countryDescription": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1559
+    },
+    "address.regulationLanguage": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1559
+    },
+    "address.logicalId": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1559
+    },
+    "address.regulationSummary": {
+        "type": "object",
+        "optional": true,
+        "occurrences": 1559
+    },
+    "address.regulationSummary.regulationType": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1559
+    },
+    "address.regulationSummary.publicationDate": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1559
+    },
+    "address.regulationSummary.numberTitle": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1559
+    },
+    "address.regulationSummary.publicationUrl": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1559
+    },
+    "designationDate": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 5422
+    },
+    "nameAlias[].remark": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 2396
+    },
+    "address[]": {
+        "type": "array",
+        "optional": true,
+        "occurrences": 306
+    },
+    "address[].city": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 887
+    },
+    "address[].street": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 887
+    },
+    "address[].poBox": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 887
+    },
+    "address[].zipCode": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 887
+    },
+    "address[].region": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 887
+    },
+    "address[].place": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 887
+    },
+    "address[].asAtListingTime": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 887
+    },
+    "address[].countryIso2Code": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 887
+    },
+    "address[].countryDescription": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 887
+    },
+    "address[].regulationLanguage": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 887
+    },
+    "address[].logicalId": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 887
+    },
+    "address[].regulationSummary": {
+        "type": "object",
+        "optional": true,
+        "occurrences": 887
+    },
+    "address[].regulationSummary.regulationType": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 887
+    },
+    "address[].regulationSummary.publicationDate": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 887
+    },
+    "address[].regulationSummary.numberTitle": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 887
+    },
+    "address[].regulationSummary.publicationUrl": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 887
+    },
+    "address[].contactInfo": {
+        "type": "array | object",
+        "optional": true,
+        "occurrences": 108
+    },
+    "address[].contactInfo.key": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 38
+    },
+    "address[].contactInfo.value": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 38
+    },
+    "address[].contactInfo[]": {
+        "type": "array",
+        "optional": true,
+        "occurrences": 70
+    },
+    "address[].contactInfo[].key": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 175
+    },
+    "address[].contactInfo[].value": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 175
+    },
+    "address[].remark": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 210
+    },
+    "birthdate.remark": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 727
+    },
+    "address.remark": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 338
+    },
+    "identification[]": {
+        "type": "array",
+        "optional": true,
+        "occurrences": 626
+    },
+    "identification[].diplomatic": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1477
+    },
+    "identification[].knownExpired": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1477
+    },
+    "identification[].knownFalse": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1477
+    },
+    "identification[].reportedLost": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1477
+    },
+    "identification[].revokedByIssuer": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1477
+    },
+    "identification[].issuedBy": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1477
+    },
+    "identification[].latinNumber": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1477
+    },
+    "identification[].nameOnDocument": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1477
+    },
+    "identification[].number": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1477
+    },
+    "identification[].region": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1477
+    },
+    "identification[].identificationTypeCode": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1477
+    },
+    "identification[].identificationTypeDescription": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1477
+    },
+    "identification[].countryIso2Code": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1477
+    },
+    "identification[].countryDescription": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1477
+    },
+    "identification[].regulationLanguage": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1477
+    },
+    "identification[].logicalId": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1477
+    },
+    "identification[].remark": {
+        "type": "array | string",
+        "optional": true,
+        "occurrences": 836
+    },
+    "identification[].remark[]": {
+        "type": "array",
+        "optional": true,
+        "occurrences": 3
+    },
+    "identification[].regulationSummary": {
+        "type": "object",
+        "optional": true,
+        "occurrences": 1477
+    },
+    "identification[].regulationSummary.regulationType": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1477
+    },
+    "identification[].regulationSummary.publicationDate": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1477
+    },
+    "identification[].regulationSummary.numberTitle": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1477
+    },
+    "identification[].regulationSummary.publicationUrl": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1477
+    },
+    "citizenship[]": {
+        "type": "array",
+        "optional": true,
+        "occurrences": 84
+    },
+    "citizenship[].region": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 173
+    },
+    "citizenship[].countryIso2Code": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 173
+    },
+    "citizenship[].countryDescription": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 173
+    },
+    "citizenship[].regulationLanguage": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 173
+    },
+    "citizenship[].logicalId": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 173
+    },
+    "citizenship[].regulationSummary": {
+        "type": "object",
+        "optional": true,
+        "occurrences": 173
+    },
+    "citizenship[].regulationSummary.regulationType": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 173
+    },
+    "citizenship[].regulationSummary.publicationDate": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 173
+    },
+    "citizenship[].regulationSummary.numberTitle": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 173
+    },
+    "citizenship[].regulationSummary.publicationUrl": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 173
+    },
+    "birthdate[].yearRangeFrom": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 27
+    },
+    "birthdate[].yearRangeTo": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 27
+    },
+    "birthdate[].remark": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 129
+    },
+    "identification[].validTo": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 76
+    },
+    "identification.validFrom": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 19
+    },
+    "birthdate.yearRangeFrom": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 28
+    },
+    "birthdate.yearRangeTo": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 29
+    },
+    "identification[].validFrom": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 12
+    },
+    "nameAlias.gender": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 407
+    },
+    "identification.validTo": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 59
+    },
+    "citizenship.remark": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 19
+    },
+    "identification.issueDate": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 228
+    },
+    "identification[].issueDate": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 322
+    },
+    "address.contactInfo": {
+        "type": "array | object",
+        "optional": true,
+        "occurrences": 463
+    },
+    "address.contactInfo.key": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 105
+    },
+    "address.contactInfo.value": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 105
+    },
+    "nameAlias.remark": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 132
+    },
+    "address.contactInfo[]": {
+        "type": "array",
+        "optional": true,
+        "occurrences": 358
+    },
+    "address.contactInfo[].key": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1059
+    },
+    "address.contactInfo[].value": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 1059
+    },
+    "citizenship[].remark": {
+        "type": "string",
+        "optional": true,
+        "occurrences": 6
+    },
+    "remark[]": {
+        "type": "array",
+        "optional": true,
+        "occurrences": 3
+    }
+}

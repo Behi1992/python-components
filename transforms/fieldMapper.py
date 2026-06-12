@@ -152,10 +152,15 @@ def normalize_scalar(value: Any, fallback=""):
 
 
 def detect_entity_type(raw_json: dict) -> str:
-    val = JsonPath.get(raw_json, "generalInfo.entityType.text") or raw_json.get("Type", "")
+    val = (
+        raw_json.get("entity_type")
+        or JsonPath.get(raw_json, "generalInfo.entityType.text")
+        or raw_json.get("Type", "")
+    )
+
     val = str(val).strip().lower()
 
-    if val == "individual":
+    if val in ["individual", "person"]:
         return "Individual"
 
     if val in ["entity", "organization", "organisation"]:
@@ -470,15 +475,28 @@ class ExplodeHandler(BaseHandler):
         if not rule.source_value:
             return []
 
-        raw_value = resolve_in_context(raw_json, rule.source_value, item, anchor)
+        source_expr = str(rule.source_value).strip()
+        separator = "|"
+
+        if "," in source_expr:
+            source_expr, separator = source_expr.rsplit(",", 1)
+            source_expr = source_expr.strip()
+            separator = separator.strip()
+
+        raw_value = resolve_in_context(
+            raw_json,
+            source_expr,
+            item,
+            anchor
+        )
 
         if raw_value is None:
-            raw_value = rule.source_value
+            return []
 
         return [
             x.strip()
-            for x in str(raw_value).split("|")
-            if x.strip()
+            for x in str(raw_value).split(separator)
+            if x.strip() and x.strip().upper() != "N/A"
         ]
 
 # class ConditionalPathHandler(BaseHandler):

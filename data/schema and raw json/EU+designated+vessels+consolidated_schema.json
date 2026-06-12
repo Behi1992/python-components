@@ -1,0 +1,27 @@
+{
+    "Unnamed: 0": {
+        "type": "string",
+        "optional": false,
+        "occurrences": 1116
+    },
+    "Vessel name at designation time": {
+        "type": "string",
+        "optional": false,
+        "occurrences": 1116
+    },
+    "IMO number": {
+        "type": "string",
+        "optional": false,
+        "occurrences": 1116
+    },
+    "Date of application": {
+        "type": "string",
+        "optional": false,
+        "occurrences": 1116
+    },
+    "Link to relevant EU Official Journal ": {
+        "type": "string",
+        "optional": false,
+        "occurrences": 1116
+    }
+}

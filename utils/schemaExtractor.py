@@ -1,7 +1,7 @@
 import json
 
-json_file = r"/Users/mac/Desktop/VV_Python_Project/UK-Sanctions-List_raw.jsonl"
-OUTPUT_SCHEMA_FILE = "oUK-Sanctions-List_schema.json"
+json_file = r"/Users/mac/Desktop/VV_Python_Project/parsing/EU_full.jsonl"
+OUTPUT_SCHEMA_FILE = "EU_full_schema.json"
 
 
 schema = {}

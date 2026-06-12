@@ -169,7 +169,7 @@ def run_tabular_ingestion(
 if __name__ == "__main__":
 
     output_path = run_tabular_ingestion(
-        input_file="/Users/mac/Desktop/VV_Python_Project/Australian_Sanctions_Consolidated_List.xlsx"
+        input_file="/Users/mac/Desktop/VV_Python_Project/EU+designated+vessels+consolidated (6).xlsx"
     )
 
     print(
