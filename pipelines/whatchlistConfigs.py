@@ -6,7 +6,7 @@ WATCHLIST_CONFIGS = {
         "url": "https://sanctionslist.fcdo.gov.uk/docs/UK-Sanctions-List.xml",
         "file_type": "xml",
         "root_tag": "Designation",
-        "external_id":"UniqueID",
+        "external_id_path":"UniqueID",
         "schedule": "daily",
         
     },
@@ -16,7 +16,7 @@ WATCHLIST_CONFIGS = {
         "url": "https://sanctionslistservice.ofac.treas.gov/api/PublicationPreview/exports/SDN_ENHANCED.XML",
         "file_type": "xml",
         "root_tag": "entity",
-        "external_id":"id",
+        "external_id_path":"id",
         "schedule": "daily",
     },
 
@@ -25,7 +25,7 @@ WATCHLIST_CONFIGS = {
         "url": "https://sanctionslistservice.ofac.treas.gov/api/PublicationPreview/exports/CONS_ENHANCED.XML",
         "file_type": "xml",
         "root_tag": "entity",
-        "external_id":"id",
+        "external_id_path":"id",
         "schedule": "daily",
     },
 
@@ -33,12 +33,13 @@ WATCHLIST_CONFIGS = {
         "source_name": "DFAT",
         "url": "https://www.dfat.gov.au/sites/default/files/Australian_Sanctions_Consolidated_List.xlsx",
         "file_type": "xlsx",
-        "external_id":"Reference",
+        "external_id_path":"Reference",
         "schedule": "daily",
     },
     
     "AMLC-DNFBP": {
     "source_name": "DNFBP",
+    "external_id_path": "unique_id",
     "url": "http://www.amlc.gov.ph/images/PDFs/Main/DNFBP033126.pdf",
     "file_type": "pdf",
     "schedule": "daily",
@@ -47,7 +48,7 @@ WATCHLIST_CONFIGS = {
         {
             "handler": "detect_entity_type",
             "config": {
-                "input_field": "INSTITUTION NAME",
+                "input_field": "INSTITUTION CODE",
                 "output_field": "entity_type"
             }
         }
@@ -115,7 +116,7 @@ WATCHLIST_CONFIGS = {
         "source_name": "ATC-DESIGNATED-TERRORIST-GROUPS",
         "url": "https://atc.gov.ph/groups/",
         "file_type": "html",
-        "external_id": "unique_id",
+        "external_id_path": "unique_id",
         "schedule": "daily",
         "local_path": "data/downloads/Designated Terrorist Groups _ Anti-Terrorism Council.html",
 
@@ -135,7 +136,7 @@ WATCHLIST_CONFIGS = {
         "source_name": "EU-DESIGNATED-VESSELS",
         "url": "https://dk9q89lxhn3e0.cloudfront.net/EU+designated+vessels+consolidated.xlsx",
         "file_type": "xlsx",
-        "external_id": "IMO number",
+        "external_id_path": "IMO number",
         "schedule": "daily",
 
         "enrichment": [
@@ -149,7 +150,7 @@ WATCHLIST_CONFIGS = {
         "source_name": "EU-TRAVEL-BAN",
         "url": "https://www.sanctionsmap.eu/api/v1/travelbans/file/101",
         "file_type": "xml",
-        "external_id": "id",
+        "external_id_path": "logicalId",
         "root_tag": "sanctionEntity",
         "schedule": "daily",
     },
