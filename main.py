@@ -4,7 +4,7 @@ from ingestion.downloader.interface import download
 from transforms.postNormalization import run_post_normalization, load_jsonl, save_jsonl
 from transforms.preNormalization import run_pre_normalization
 from utils.valueExplorer import extract_unique_values
-from parsing.xmlParser import run_xml_ingestion
+# from parsing.xmlParser import run_xml_ingestion
 from transforms.fieldMapper import run_mapping
 from parsing.pdfParser import PdfParser
 import pandas as pd
@@ -87,8 +87,8 @@ def test_post_normalization():
 def test_value_explorer():
     
     extract_unique_values(
-    input_jsonl="/Users/mac/Desktop/VV_Python_Project/finallAUST.jsonl",
-    json_path="dob.date_full",
+    input_jsonl="/Users/mac/Desktop/VV_Python_Project/data/final/UKSL_final.jsonl",
+    json_path="entity_type",
     output_txt="dates.txt"
 )
     
@@ -147,9 +147,9 @@ if __name__ == "__main__":
     # test_downloader()
     # test_xml_ingestor()
     # test_post_normalization()
-    # test_value_explorer()
+    test_value_explorer()
     #test_pdf_parser()
     #test_pre_normalization()
-    test_mapping()
+    #test_mapping()
     # test_tabular_parser()
     #test_xml_parser()

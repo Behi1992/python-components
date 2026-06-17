@@ -1,12 +1,5 @@
 import json
 
-json_file = r"/Users/mac/Desktop/VV_Python_Project/parsing/EU_full.jsonl"
-OUTPUT_SCHEMA_FILE = "EU_full_schema.json"
-
-
-schema = {}
-total_records = 0
-
 
 def detect_type(value):
 
@@ -42,9 +35,7 @@ def merge_types(old_type, new_type):
     return " | ".join(sorted(types))
 
 
-def update_schema(data, path=""):
-
-    global schema
+def update_schema(data, schema, path=""):
 
     if isinstance(data, dict):
 
@@ -70,7 +61,11 @@ def update_schema(data, path=""):
 
                 schema[full_path]["count"] += 1
 
-            update_schema(value, full_path)
+            update_schema(
+                data=value,
+                schema=schema,
+                path=full_path
+            )
 
     elif isinstance(data, list):
 
@@ -84,49 +79,111 @@ def update_schema(data, path=""):
             }
 
         else:
+
             schema[array_path]["count"] += 1
 
         for item in data:
-            update_schema(item, array_path)
+
+            update_schema(
+                data=item,
+                schema=schema,
+                path=array_path
+            )
 
 
-with open(json_file, "r", encoding="utf-8") as f:
+def extract_schema(jsonl_file):
 
-    for line in f:
+    schema = {}
+    total_records = 0
+    errors = []
 
-        line = line.strip()
+    with open(jsonl_file, "r", encoding="utf-8") as f:
 
-        if not line:
-            continue
+        for line_number, line in enumerate(f, start=1):
 
-        try:
+            line = line.strip()
 
-            data = json.loads(line)
+            if not line:
+                continue
 
-            update_schema(data)
+            try:
 
-            total_records += 1
+                data = json.loads(line)
 
-        except Exception as e:
+                update_schema(
+                    data=data,
+                    schema=schema
+                )
 
-            print("Error:", e)
+                total_records += 1
+
+            except Exception as e:
+
+                errors.append(
+                    f"Line {line_number}: {e}"
+                )
+
+    final_schema = {}
+
+    for field, info in schema.items():
+
+        final_schema[field] = {
+            "type": info["type"],
+            "optional": info["count"] < total_records,
+            "occurrences": info["count"]
+        }
+
+    return final_schema, total_records, errors
 
 
-final_schema = {}
+def schema_to_rows(final_schema):
 
-for field, info in schema.items():
+    rows = []
 
-    final_schema[field] = {
-        "type": info["type"],
-        "optional": info["count"] < total_records,
-        "occurrences": info["count"]
-    }
+    for field, info in final_schema.items():
+
+        rows.append(
+            {
+                "field": field,
+                "type": info["type"],
+                "optional": info["optional"],
+                "occurrences": info["occurrences"]
+            }
+        )
+
+    return rows
 
 
-with open(OUTPUT_SCHEMA_FILE, "w", encoding="utf-8") as f:
+def write_schema_json(final_schema, output_schema_file):
 
-    json.dump(final_schema, f, ensure_ascii=False, indent=4)
+    with open(output_schema_file, "w", encoding="utf-8") as f:
+
+        json.dump(
+            final_schema,
+            f,
+            ensure_ascii=False,
+            indent=4
+        )
 
 
-print("Done:", total_records)
-print("Schema fields:", len(final_schema))
+# =========================================================
+# LOCAL TEST
+# =========================================================
+
+if __name__ == "__main__":
+
+    json_file = r"/Users/mac/Desktop/VV_Python_Project/parsing/EU_full.jsonl"
+    output_schema_file = "EU_full_schema.json"
+
+    final_schema, total_records, errors = extract_schema(json_file)
+
+    write_schema_json(
+        final_schema=final_schema,
+        output_schema_file=output_schema_file
+    )
+
+    print("Done:", total_records)
+    print("Schema fields:", len(final_schema))
+
+    if errors:
+        print("Errors:", len(errors))
